@@ -62,13 +62,13 @@ Para acceder a la consola H2:
 ### Construir la imagen Docker
 
 ```bash
-docker build -t tuusuario/inventario:latest .
+docker build -t dicahica/inventario:latest .
 ```
 
 ###  Ejecutar contenedor
 
 ```bash
-docker run -p 8080:8080 tuusuario/inventario:latest
+docker run -p 8080:8080 dicahica/inventario:latest
 ```
 
 ###  Accesos desde contenedor:
