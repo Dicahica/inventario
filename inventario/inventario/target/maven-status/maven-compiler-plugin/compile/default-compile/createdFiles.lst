@@ -1,0 +1,7 @@
+com\prueba\inventario\InventarioApplication.class
+com\prueba\inventario\service\EquipoService.class
+com\prueba\inventario\model\entities\Equipo.class
+com\prueba\inventario\controller\EquipoController.class
+com\prueba\inventario\repository\EquipoRepository.class
+com\prueba\inventario\service\impl\EquipoServiceImpl.class
+com\prueba\inventario\config\OpenApiConfig.class
