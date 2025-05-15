@@ -12,7 +12,8 @@ Servicio REST para la gestión de inventario y cálculo de depreciación de acti
 - Base de Datos H2 (en memoria)
 - OpenAPI 3 + Swagger UI
 - Docker
-- Kubernetes
+- Docker Compose
+- Kubernetes (Minikube)
 
 ---
 
@@ -23,92 +24,86 @@ git clone https://github.com/dicahica/inventario.git
 cd inventario
 ```
 
----
+Ejecución en ambiente local
+Prerequisitos:
+Java 21 instalado
 
-## Ejecución en ambiente local
+Maven instalado
 
-### Prerequisitos:
-- Java 21 instalado
-- Maven instalado
-
-### Construcción y ejecución:
-
+Construcción y ejecución:
 ```bash
 mvn clean install
 mvn spring-boot:run
 ```
+Accesos importantes:
+Swagger UI → http://localhost:8080/swagger-ui.html
 
----
+H2 Console → http://localhost:8080/h2-console
 
-###  Accesos importantes:
-
-- **Swagger UI** → [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-- **H2 Console** → [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
-
-**Nota:**  
+Nota:
 Para acceder a la consola H2:
 
-- JDBC URL: `jdbc:h2:mem:testdb`
-- Username: `sa`
-- Sin password
+JDBC URL: jdbc:h2:mem:testdb
 
----
+Username: sa
 
-## Ejecución con Docker
+Sin password
 
-### Prerequisitos:
-- Docker instalado
+Instalación de Docker (si no lo tienes)
+Windows:
+Descargar e instalar Docker Desktop desde: https://www.docker.com/products/docker-desktop
 
-### Construir la imagen Docker
+Linux:
 
+```bash
+sudo apt-get update
+sudo apt-get install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+Verificar versión:
+
+```bash
+docker --version
+```
+Ejecución con Docker
+Prerequisitos:
+Docker instalado
+
+Construir la imagen Docker
 ```bash
 docker build -t dicahica/inventario:latest .
 ```
-
-###  Ejecutar contenedor
-
+Ejecutar contenedor
 ```bash
 docker run -p 8080:8080 dicahica/inventario:latest
 ```
+Accesos desde contenedor:
+Swagger UI → http://localhost:8080/swagger-ui.html
 
-###  Accesos desde contenedor:
+H2 Console → http://localhost:8080/h2-console
 
-- **Swagger UI** → [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-- **H2 Console** → [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+Despliegue en Kubernetes
+Prerequisitos:
+Minikube o un cluster Kubernetes configurado
 
----
+kubectl instalado y configurado
 
-##  Despliegue en Kubernetes
-
-###  Prerequisitos:
-- Minikube o un cluster Kubernetes configurado
-- kubectl instalado y configurado
-
-###  Crear los recursos Kubernetes:
-
+Crear los recursos Kubernetes:
 ```bash
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
-
-### Verificar los pods:
-
+Verificar los pods:
 ```bash
 kubectl get pods
 ```
-
-### Obtener la URL pública:
-
-Si usas Minikube:
-
+Obtener la URL pública (si usas Minikube):
 ```bash
 minikube service inventario-service --url
 ```
-
 Accede luego a:
 
-- **Swagger UI** → `URL-OBTENIDA/swagger-ui.html`
-- **H2 Console** → `URL-OBTENIDA/h2-console`
+Swagger UI → URL-OBTENIDA/swagger-ui.html
 
----
-
+H2 Console → URL-OBTENIDA/h2-console
